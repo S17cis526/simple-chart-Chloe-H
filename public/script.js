@@ -1,6 +1,6 @@
 $(function() {
     var peerReviewCanvas = $('#peer-review')[0];
-    // context
+    // Peer review canvas context
     var peerReviewCtx = peerReviewCanvas.getContext('2d'); // treat it as a 2-D canvas (x- and y-axis)
     var colors = [
         'red',
@@ -9,10 +9,13 @@ $(function() {
         'blue',
         'purple',
         'indigo',
-        'black',
-        'maroon',
-        'chartreuse',
-        'violet'
+        'MediumBlue',
+        'MediumOrchid',
+        'MediumPurple',
+        'MediumSeaGreen',
+        'MediumVioletRed',
+        'MidnightBlue',
+        'black'
     ];
 
     // Draw peer review chart
@@ -27,6 +30,7 @@ $(function() {
     // fill in the path we defined
     peerReviewCtx.stroke();
 
+    // Draw a bar chart
     $.ajax({
         url: '/peerReview.json',
         dataType: 'json',
@@ -40,6 +44,7 @@ $(function() {
                 var height = value * 20;
 
                 peerReviewCtx.fillStyle = colors[index];
+
                 // Draw bar
                 peerReviewCtx.fillRect(x, y, 5, height);
 
@@ -47,6 +52,35 @@ $(function() {
                 peerReviewCtx.fillRect(100, 80 + 20 * index, 10, 10);
                 peerReviewCtx.fillText(category, 120, 90 + 20 * index);
             });
-        }
+        } // end success
+    });
+
+    // Draw the point distribution graph
+
+    var pointDistCanvas = $('#point-distribution')[0];
+    var pointDistCtx = pointDistCanvas.getContext('2d');
+
+    $.ajax({
+        url: '/pointDistribution.json',
+        dataType: 'json',
+        success: function(data) {
+            var people = Object.keys(data);
+            var total = Object.values(data).reduce(function(acc, value) {
+                return acc + value;
+            }, 0);
+            var start = 0;
+
+            people.forEach(function(person, index) {
+                var percent = data[person] / total;
+                var end = start + percent * 2 * Math.PI;
+
+                pointDistCtx.beginPath();
+                pointDistCtx.arc(100, 100, 80, start, end);
+                pointDistCtx.fillStyle = colors[index];
+                pointDistCtx.fill();
+
+                start = end;
+            });
+        } // end success
     });
 });

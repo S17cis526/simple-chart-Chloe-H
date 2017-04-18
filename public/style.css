@@ -1,7 +1,15 @@
-#peer-review {
-    width: 200px;
-    height: 250px;
+canvas {
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 3px 3px 5px;
+}
+
+#peer-review {
+    width: 200px;
+    height: 250px;
+}
+
+#point-distribution {
+    width: 200px;
+    height: 200px;
 }
