@@ -40,6 +40,7 @@ function serveFile(file, type, req, res) {
  */
 function handleRequest(req, res) {
     switch (req.url) {
+        // Serving static files
         case '/':
         case '/index.html':
             serveFile('public/index.html', 'text/html', req, res);
@@ -56,6 +57,7 @@ function handleRequest(req, res) {
         case '/pointDistribution.json':
             serveFile('data/pointDistribution.json', 'application/json', req, res);
             break;
+        // Serve error code
         default:
             res.statusCode = 404;
             res.end("Not found");
