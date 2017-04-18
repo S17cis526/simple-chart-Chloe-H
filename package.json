@@ -1,7 +1,7 @@
 {
   "name": "simple-chart",
   "version": "1.0.0",
-  "description": "A simple exmaple of drawing charts using the HTML5 canvas and Node.js",
+  "description": "A simple example of drawing charts using the HTML5 canvas and Node.js",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
