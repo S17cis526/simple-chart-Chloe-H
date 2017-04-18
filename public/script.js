@@ -82,7 +82,7 @@ $(function() {
     var pointDistCtx = pointDistCanvas.getContext('2d');
 
     // Draw the title for the point distribution chart
-    pointDistCtx.strokeText("Point Distribution", 10, 10);
+    pointDistCtx.strokeText("Point Distribution", 60, 10);
 
     // Draw the point distribution graph
     $.ajax({
@@ -119,8 +119,11 @@ $(function() {
                 // Draw the slice of the pie
                 pointDistCtx.arc(100, 100, 80, start, end);
 
+                // Get index of different color palette
+                var paletteIndex = (index + 7) % colors.length;
+
                 // Set the color for the slice
-                pointDistCtx.fillStyle = colors[index];
+                pointDistCtx.fillStyle = colors[paletteIndex];
 
                 // Fill the slice with that color
                 pointDistCtx.fill();
